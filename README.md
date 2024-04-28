@@ -17,4 +17,4 @@ The final BIM model with IfcCostitem (using FZK Viewer):
 
 The IFC file with the new relations between object entities and cost entities can also be viewed through the USBIM viewer developed by ACCA. Below is the link to the page to view the otherwise downloadable template in the "IFC_output" folder.
 
-[Updated IFC model](https://service.usbim.com/link/5ymDpiww2t1XQT1TTktGoAif)
+[Updated IFC model](**https://service.usbim.com/link/5ymDpiww2t1XQT1TTktGoAif**)
