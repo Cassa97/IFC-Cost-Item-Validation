@@ -5,4 +5,7 @@ Link Cost To Obj
 
 <img src="https://github.com/Cassa97/IFC-Cost-Item-Validation/assets/115898053/4859ec98-5e08-4acc-8836-fc8dc03125d0" width="620" >
 
+Validation of Cost-Obj relation
+
+<img src="https://github.com/Cassa97/IFC-Cost-Item-Validation/assets/115898053/f2e77d69-b550-4b9f-a8af-8120329ba027" width="620" >
 
