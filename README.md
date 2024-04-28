@@ -5,7 +5,7 @@ This study defines a new architecture for cost items within the Industry Foundat
 
 The FlowChart is:
 
-<img src="https://github.com/Cassa97/IFC-Cost-Item-Validation/assets/115898053/4a4da427-f001-4a86-8096-5522b3933c80" width="500" >  
+<img src="https://github.com/Cassa97/IFC-Cost-Item-Validation/assets/115898053/e08ca3d8-ea6d-44f8-858c-96679347161b" width="500" >  
 
 The final BIM model with IfcCostitem (using FZK Viewer):
 
