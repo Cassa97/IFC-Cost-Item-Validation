@@ -9,5 +9,5 @@ PASS
 
 FAIL
 
-<img src="https://github.com/Cassa97/IFC-Cost-Item-Validation/assets/115898053/45fcdb5c-fff6-461d-8719-6744168bcf8b" width="400" >
+<img src="https://github.com/Cassa97/IFC-Cost-Item-Validation/assets/115898053/45fcdb5c-fff6-461d-8719-6744168bcf8b" width="405" >
 
