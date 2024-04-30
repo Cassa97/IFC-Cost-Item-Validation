@@ -1,0 +1,598 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ids xmlns="http://standards.buildingsmart.org/IDS" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.buildingsmart.org/IDS http://standards.buildingsmart.org/IDS/0.9.7/ids.xsd">
+    <info>
+        <title>My IDS</title>
+    </info>
+    <specifications>
+        <specification name="IfcSlab Name and PredefinedType Requirements" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IFCSLAB</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>PredefinedType</simpleValue>
+                    </name>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="BASESLAB" />
+                            <xs:enumeration value="FLOOR" />
+                            <xs:enumeration value="ROOF" />
+                            <xs:enumeration value="LANDING" />
+                            <xs:enumeration value="NOTDEFINED" />
+                            <xs:enumeration value="USERDEFINED" />
+                        </xs:restriction>
+                    </value>
+                </attribute>
+            </requirements>
+        </specification>
+        <specification name="IfcWall Name and PredefinedType Requirements" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IFCWALL</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>PredefinedType</simpleValue>
+                    </name>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="MOVABLE" />
+                            <xs:enumeration value="PARAPET" />
+                            <xs:enumeration value="PARTITIONING" />
+                            <xs:enumeration value="PLUMBINGWALL" />
+                            <xs:enumeration value="SHEAR" />
+                            <xs:enumeration value="SOLIDWALL" />
+                            <xs:enumeration value="STANDARD" />
+                            <xs:enumeration value="POLYGONAL" />
+                            <xs:enumeration value="ELEMENTEDWALL" />
+                            <xs:enumeration value="NOTDEFINED" />
+                            <xs:enumeration value="USERDEFINED" />
+                        </xs:restriction>
+                    </value>
+                </attribute>
+            </requirements>
+        </specification>
+        <specification name="IfcRoof Name and PredefinedType Requirements" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IFCROOF</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>PredefinedType</simpleValue>
+                    </name>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="FLAT_ROOF" />
+                            <xs:enumeration value="SHED_ROOF" />
+                            <xs:enumeration value="GABLE_ROOF" />
+                            <xs:enumeration value="HIP_ROOF" />
+                            <xs:enumeration value="HIPPED_GABLE_ROOF" />
+                            <xs:enumeration value="GAMBREL_ROOF" />
+                            <xs:enumeration value="MANSARD_ROOF" />
+                            <xs:enumeration value="BARREL_ROOF" />
+                            <xs:enumeration value="RAINBOW_ROOF" />
+                            <xs:enumeration value="BUTTERFLY_ROOF" />
+                            <xs:enumeration value="PAVILION_ROOF" />
+                            <xs:enumeration value="DOME_ROOF" />
+                            <xs:enumeration value="FREEFORM" />
+                            <xs:enumeration value="USERDEFINED" />
+                            <xs:enumeration value="NOTDEFINED" />
+                        </xs:restriction>
+                    </value>
+                </attribute>
+            </requirements>
+        </specification>
+        <specification name="Concrete Foundation Requirements" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IFCSLAB</simpleValue>
+                    </name>
+                    <predefinedType>
+                        <simpleValue>BASESLAB</simpleValue>
+                    </predefinedType>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                </attribute>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>FireRating</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>IsExternal</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Loadbearing</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Compartimentation</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Status</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="NEW" />
+                            <xs:enumeration value="EXISTING" />
+                            <xs:enumeration value="DEMOLISH" />
+                            <xs:enumeration value="TEMPORARY" />
+                            <xs:enumeration value="OTHER" />
+                            <xs:enumeration value="NOTKNOWN" />
+                            <xs:enumeration value="UNSET" />
+                        </xs:restriction>
+                    </value>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>ConstructionMethod</simpleValue>
+                    </baseName>
+                    <value>
+                        <simpleValue>In Situ</simpleValue>
+                    </value>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>StructuralClass</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>StrengthClass</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>ExposureClass</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCMASSDENSITYMEASURE" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>ReinforcementVolumeRatio</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>ReinforcementStrengthClass</simpleValue>
+                    </baseName>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="Concrete Wall Requirements" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IFCWALL</simpleValue>
+                    </name>
+                </entity>
+                <attribute>
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                    <value>
+                        <simpleValue>Muro di base:MUR_STR_CA_30_CA30</simpleValue>
+                    </value>
+                </attribute>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                </attribute>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>FireRating</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>IsExternal</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Loadbearing</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Compartimentation</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Status</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="NEW" />
+                            <xs:enumeration value="EXISTING" />
+                            <xs:enumeration value="DEMOLISH" />
+                            <xs:enumeration value="TEMPORARY" />
+                            <xs:enumeration value="OTHER" />
+                            <xs:enumeration value="NOTKNOWN" />
+                            <xs:enumeration value="UNSET" />
+                        </xs:restriction>
+                    </value>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>ConstructionMethod</simpleValue>
+                    </baseName>
+                    <value>
+                        <simpleValue>In Situ</simpleValue>
+                    </value>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>StructuralClass</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>StrengthClass</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>ExposureClass</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCMASSDENSITYMEASURE" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>ReinforcementVolumeRatio</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_ConcreteElementGeneral</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>ReinforcementStrengthClass</simpleValue>
+                    </baseName>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="Floor Requirements" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IFCSLAB</simpleValue>
+                    </name>
+                    <predefinedType>
+                        <simpleValue>FLOOR</simpleValue>
+                    </predefinedType>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                </attribute>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>FireRating</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>IsExternal</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Loadbearing</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Compartimentation</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_SlabCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Status</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="NEW" />
+                            <xs:enumeration value="EXISTING" />
+                            <xs:enumeration value="DEMOLISH" />
+                            <xs:enumeration value="TEMPORARY" />
+                            <xs:enumeration value="OTHER" />
+                            <xs:enumeration value="NOTKNOWN" />
+                            <xs:enumeration value="UNSET" />
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="Partitioning Wall Requirements" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IFCWALL</simpleValue>
+                    </name>
+                </entity>
+                <attribute>
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                    <value>
+                        <simpleValue>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5</simpleValue>
+                    </value>
+                </attribute>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                </attribute>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>FireRating</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>IsExternal</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Loadbearing</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Compartimentation</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_WallCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Status</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="NEW" />
+                            <xs:enumeration value="EXISTING" />
+                            <xs:enumeration value="DEMOLISH" />
+                            <xs:enumeration value="TEMPORARY" />
+                            <xs:enumeration value="OTHER" />
+                            <xs:enumeration value="NOTKNOWN" />
+                            <xs:enumeration value="UNSET" />
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+        <specification name="Roof Requirements" ifcVersion="IFC4">
+            <applicability minOccurs="0" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IFCROOF</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>ObjectType</simpleValue>
+                    </name>
+                </attribute>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_RoofCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>FireRating</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCBOOLEAN" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_RoofCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>IsExternal</simpleValue>
+                    </baseName>
+                </property>
+                <property dataType="IFCLABEL" cardinality="required">
+                    <propertySet>
+                        <simpleValue>Pset_RoofCommon</simpleValue>
+                    </propertySet>
+                    <baseName>
+                        <simpleValue>Status</simpleValue>
+                    </baseName>
+                    <value>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="NEW" />
+                            <xs:enumeration value="EXISTING" />
+                            <xs:enumeration value="DEMOLISH" />
+                            <xs:enumeration value="TEMPORARY" />
+                            <xs:enumeration value="OTHER" />
+                            <xs:enumeration value="NOTKNOWN" />
+                            <xs:enumeration value="UNSET" />
+                        </xs:restriction>
+                    </value>
+                </property>
+            </requirements>
+        </specification>
+    </specifications>
+</ids>

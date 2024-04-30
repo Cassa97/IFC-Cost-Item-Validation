@@ -1,0 +1,2034 @@
+<!--
+    IfcTester - IDS based model auditing
+    Copyright (C) 2022 Dion Moult <dion@thinkmoult.com>
+
+    This file is part of IfcTester.
+
+    IfcTester is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    IfcTester is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with IfcTester.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html lang=>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="foobaro">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #97cc64;
+            --light-green: #b6cca1;
+            --red: #fb5a3e;
+            --light-red: #fbb4a8;
+        }
+        body { font-family: 'Arial', sans-serif; padding: 10px 40px; }
+        section { padding: 15px; border-radius: 5px; border: 1px solid #eee; margin-bottom: 15px; }
+        section>h2 { margin-top: 0px; }
+        span.time { color: #999; font-style: italic; float: right; }
+        span.step-time { float: right; color: #555; font-size: 0.8em; font-style: italic; }
+        span.item { padding: 5px; border-radius: 5px; margin-right: 5px; border: 1px solid #eee; }
+        span.item.pass, span.item.fail { color: #FFF; font-weight: bold; border: 0px; }
+        p.fail { background-color: #fb5a3e; padding: 5px; border-radius: 5px; color: #fff; }
+        p.unspecified { background-color: #994f00; padding: 5px; border-radius: 5px; color: #fff; }
+        p.skipped { background-color: #8b8d8f; padding: 5px; border-radius: 5px; color: #fff; }
+        p.description { background-color: #eee; border-radius: 5px; padding: 20px; margin-left: auto; margin-right: auto; display: inline-block; font-weight: bold;}
+        li { padding: 10px; font-family: monospace; }
+        li.pass { background-color: var(--light-green); color: #333; }
+        li.fail { background-color: var(--light-red); color: #900; }
+        li.unspecified { background-color: #ffd37f; color: #a30; }
+        li.skipped { background-color: #f5f5f5; color: #333; }
+        li p { margin-bottom: 0px; }
+        footer { color: #999; font-size: 0.8em; }
+        header { text-align: center; }
+        hr { margin: 20px; margin-left: 0px; margin-right: 0px;  border: none; border-top: 1px solid #ccc; }
+        summary { display: flex; cursor: pointer; }
+        summary::-webkit-details-marker { display: none; }
+        * {box-sizing:border-box}
+        .container { width: 100%; background-color: #ddd; border-radius: 5px}
+        .percent { text-align: left; padding-top: 5px; padding-left: 5px; padding-bottom: 5px; color: white; border-radius: 5px; white-space: nowrap; }
+        .pass { background-color: var(--green); }
+        .fail { background-color: var(--red); }
+        table { width: 100%; border-bottom: 2px solid var(--red); border-spacing: 0; border-radius: 5px; margin-top: 10px; }
+        th, td { padding: 5px; }
+        thead>tr { background-color: var(--red); font-weight: bold; color: #fff; }
+        tbody tr { border-bottom: 1px solid var(--red); }
+        tbody tr:nth-child(odd) { background-color: rgba(1, 1, 1, 0.05); }
+        tbody tr:nth-child(even) { background-color: rgba(1, 1, 1, 0.1); }
+        tbody tr:hover { background-color: rgba(0, 0, 0, 0); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My IDS</h1>
+        <p><strong>2024-04-30 01:24:53</strong></p>
+    </header>
+    <h2>Summary</h2>
+    <div class="container">
+        <div class="fail percent" style="width: 72%;">72%</div>
+    </div>
+    <p>
+        <span class="item fail">Fail</span>
+        <span class="item">
+            Specifications passed: <strong>3</strong> / <strong>8</strong>
+        </span>
+        <span class="item">
+            Requirements passed: <strong>35</strong> / <strong>54</strong>
+        </span>
+        <span class="item">
+            Checks passed: <strong>316</strong> / <strong>433</strong>
+        </span>
+    </p>
+    <hr>
+    <section>
+        <h2>IfcSlab Name and PredefinedType Requirements</h2>
+
+        <div class="container">
+            <div class="pass percent" style="width: 100%;">100%</div>
+        </div>
+        <p>
+            <span class="item pass">Pass</span>
+            <span class="item">
+                Checks passed: <strong>18</strong> / <strong>18</strong>
+            </span>
+            <span class="item">
+                Elements passed: <strong>6</strong> / <strong>6</strong>
+            </span>
+        </p>
+        <p>
+            <strong>Applicability</strong>
+        </p>
+        <ul>
+            <li>All IFCSLAB data</li>
+        </ul>
+        <p>
+            <strong>Requirements</strong>
+        </p>
+        <ol>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The Name shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The ObjectType shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The PredefinedType shall be {&#x27;enumeration&#x27;: [&#x27;BASESLAB&#x27;, &#x27;FLOOR&#x27;, &#x27;ROOF&#x27;, &#x27;LANDING&#x27;, &#x27;NOTDEFINED&#x27;, &#x27;USERDEFINED&#x27;]}
+                    </summary>
+                </details>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h2>IfcWall Name and PredefinedType Requirements</h2>
+
+        <div class="container">
+            <div class="pass percent" style="width: 100%;">100%</div>
+        </div>
+        <p>
+            <span class="item pass">Pass</span>
+            <span class="item">
+                Checks passed: <strong>81</strong> / <strong>81</strong>
+            </span>
+            <span class="item">
+                Elements passed: <strong>27</strong> / <strong>27</strong>
+            </span>
+        </p>
+        <p>
+            <strong>Applicability</strong>
+        </p>
+        <ul>
+            <li>All IFCWALL data</li>
+        </ul>
+        <p>
+            <strong>Requirements</strong>
+        </p>
+        <ol>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The Name shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The ObjectType shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The PredefinedType shall be {&#x27;enumeration&#x27;: [&#x27;MOVABLE&#x27;, &#x27;PARAPET&#x27;, &#x27;PARTITIONING&#x27;, &#x27;PLUMBINGWALL&#x27;, &#x27;SHEAR&#x27;, &#x27;SOLIDWALL&#x27;, &#x27;STANDARD&#x27;, &#x27;POLYGONAL&#x27;, &#x27;ELEMENTEDWALL&#x27;, &#x27;NOTDEFINED&#x27;, &#x27;USERDEFINED&#x27;]}
+                    </summary>
+                </details>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h2>IfcRoof Name and PredefinedType Requirements</h2>
+
+        <div class="container">
+            <div class="pass percent" style="width: 100%;">100%</div>
+        </div>
+        <p>
+            <span class="item pass">Pass</span>
+            <span class="item">
+                Checks passed: <strong>3</strong> / <strong>3</strong>
+            </span>
+            <span class="item">
+                Elements passed: <strong>1</strong> / <strong>1</strong>
+            </span>
+        </p>
+        <p>
+            <strong>Applicability</strong>
+        </p>
+        <ul>
+            <li>All IFCROOF data</li>
+        </ul>
+        <p>
+            <strong>Requirements</strong>
+        </p>
+        <ol>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The Name shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The ObjectType shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The PredefinedType shall be {&#x27;enumeration&#x27;: [&#x27;FLAT_ROOF&#x27;, &#x27;SHED_ROOF&#x27;, &#x27;GABLE_ROOF&#x27;, &#x27;HIP_ROOF&#x27;, &#x27;HIPPED_GABLE_ROOF&#x27;, &#x27;GAMBREL_ROOF&#x27;, &#x27;MANSARD_ROOF&#x27;, &#x27;BARREL_ROOF&#x27;, &#x27;RAINBOW_ROOF&#x27;, &#x27;BUTTERFLY_ROOF&#x27;, &#x27;PAVILION_ROOF&#x27;, &#x27;DOME_ROOF&#x27;, &#x27;FREEFORM&#x27;, &#x27;USERDEFINED&#x27;, &#x27;NOTDEFINED&#x27;]}
+                    </summary>
+                </details>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h2>Concrete Foundation Requirements</h2>
+
+        <div class="container">
+            <div class="fail percent" style="width: 65%;">65%</div>
+        </div>
+        <p>
+            <span class="item fail">Fail</span>
+            <span class="item">
+                Checks passed: <strong>17</strong> / <strong>26</strong>
+            </span>
+            <span class="item">
+                Elements passed: <strong>0</strong> / <strong>2</strong>
+            </span>
+        </p>
+        <p>
+            <strong>Applicability</strong>
+        </p>
+        <ul>
+            <li>All IFCSLAB data of type BASESLAB</li>
+        </ul>
+        <p>
+            <strong>Requirements</strong>
+        </p>
+        <ol>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The Name shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The ObjectType shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        FireRating data shall be provided in the dataset Pset_SlabCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>BASESLAB</td>
+                                <td>Platea:FND_PLA_30:242873</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1r$l67n5fDrxE0IVJzq9my</td>
+                                <td>242873</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>BASESLAB</td>
+                                <td>Platea:FND_MGR_10:242936</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1r$l67n5fDrxE0IVJzq9nz</td>
+                                <td>242936</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        IsExternal data shall be provided in the dataset Pset_SlabCommon
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Loadbearing data shall be provided in the dataset Pset_SlabCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>BASESLAB</td>
+                                <td>Platea:FND_PLA_30:242873</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1r$l67n5fDrxE0IVJzq9my</td>
+                                <td>242873</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>BASESLAB</td>
+                                <td>Platea:FND_MGR_10:242936</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1r$l67n5fDrxE0IVJzq9nz</td>
+                                <td>242936</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Compartimentation data shall be provided in the dataset Pset_SlabCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>BASESLAB</td>
+                                <td>Platea:FND_PLA_30:242873</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1r$l67n5fDrxE0IVJzq9my</td>
+                                <td>242873</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>BASESLAB</td>
+                                <td>Platea:FND_MGR_10:242936</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1r$l67n5fDrxE0IVJzq9nz</td>
+                                <td>242936</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Status data shall be {&#x27;enumeration&#x27;: [&#x27;NEW&#x27;, &#x27;EXISTING&#x27;, &#x27;DEMOLISH&#x27;, &#x27;TEMPORARY&#x27;, &#x27;OTHER&#x27;, &#x27;NOTKNOWN&#x27;, &#x27;UNSET&#x27;]} and in the dataset Pset_SlabCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>BASESLAB</td>
+                                <td>Platea:FND_PLA_30:242873</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1r$l67n5fDrxE0IVJzq9my</td>
+                                <td>242873</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>BASESLAB</td>
+                                <td>Platea:FND_MGR_10:242936</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1r$l67n5fDrxE0IVJzq9nz</td>
+                                <td>242936</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        ConstructionMethod data shall be In Situ and in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        StructuralClass data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        StrengthClass data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        ExposureClass data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        ReinforcementVolumeRatio data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        ReinforcementStrengthClass data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>BASESLAB</td>
+                                <td>Platea:FND_MGR_10:242936</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1r$l67n5fDrxE0IVJzq9nz</td>
+                                <td>242936</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h2>Concrete Wall Requirements</h2>
+
+        <div class="container">
+            <div class="fail percent" style="width: 75%;">75%</div>
+        </div>
+        <p>
+            <span class="item fail">Fail</span>
+            <span class="item">
+                Checks passed: <strong>148</strong> / <strong>195</strong>
+            </span>
+            <span class="item">
+                Elements passed: <strong>0</strong> / <strong>15</strong>
+            </span>
+        </p>
+        <p>
+            <strong>Applicability</strong>
+        </p>
+        <ul>
+            <li>All IFCWALL data</li>
+            <li>Data where the ObjectType is Muro di base:MUR_STR_CA_30_CA30</li>
+        </ul>
+        <p>
+            <strong>Requirements</strong>
+        </p>
+        <ol>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The Name shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The ObjectType shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        FireRating data shall be provided in the dataset Pset_WallCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139555</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i15</td>
+                                <td>139555</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:152817</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7Qxzzx</td>
+                                <td>152817</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        IsExternal data shall be provided in the dataset Pset_WallCommon
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Loadbearing data shall be provided in the dataset Pset_WallCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137578</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P67g</td>
+                                <td>137578</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137626</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P64Q</td>
+                                <td>137626</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137688</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P65O</td>
+                                <td>137688</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137742</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P6AE</td>
+                                <td>137742</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137799</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P6B7</td>
+                                <td>137799</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137849</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P6Bv</td>
+                                <td>137849</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139487</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i6v</td>
+                                <td>139487</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139491</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i65</td>
+                                <td>139491</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139495</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i61</td>
+                                <td>139495</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139499</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i6D</td>
+                                <td>139499</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139503</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i69</td>
+                                <td>139503</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139507</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i6L</td>
+                                <td>139507</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139555</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i15</td>
+                                <td>139555</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:152817</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7Qxzzx</td>
+                                <td>152817</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:154556</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>16CsBFf4PDQhsRUW9qPmCg</td>
+                                <td>154556</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Compartimentation data shall be provided in the dataset Pset_WallCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137578</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P67g</td>
+                                <td>137578</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137626</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P64Q</td>
+                                <td>137626</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137688</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P65O</td>
+                                <td>137688</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137742</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P6AE</td>
+                                <td>137742</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137799</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P6B7</td>
+                                <td>137799</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137849</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P6Bv</td>
+                                <td>137849</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139487</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i6v</td>
+                                <td>139487</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139491</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i65</td>
+                                <td>139491</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139495</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i61</td>
+                                <td>139495</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139499</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i6D</td>
+                                <td>139499</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139503</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i69</td>
+                                <td>139503</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139507</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i6L</td>
+                                <td>139507</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139555</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i15</td>
+                                <td>139555</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:152817</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7Qxzzx</td>
+                                <td>152817</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:154556</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>16CsBFf4PDQhsRUW9qPmCg</td>
+                                <td>154556</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Status data shall be {&#x27;enumeration&#x27;: [&#x27;NEW&#x27;, &#x27;EXISTING&#x27;, &#x27;DEMOLISH&#x27;, &#x27;TEMPORARY&#x27;, &#x27;OTHER&#x27;, &#x27;NOTKNOWN&#x27;, &#x27;UNSET&#x27;]} and in the dataset Pset_WallCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137578</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P67g</td>
+                                <td>137578</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137626</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P64Q</td>
+                                <td>137626</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137688</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P65O</td>
+                                <td>137688</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137742</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P6AE</td>
+                                <td>137742</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137799</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P6B7</td>
+                                <td>137799</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:137849</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>212O8SynL5OfOqjco_P6Bv</td>
+                                <td>137849</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139487</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i6v</td>
+                                <td>139487</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139491</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i65</td>
+                                <td>139491</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139495</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i61</td>
+                                <td>139495</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139499</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i6D</td>
+                                <td>139499</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139503</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i69</td>
+                                <td>139503</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139507</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i6L</td>
+                                <td>139507</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:139555</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i15</td>
+                                <td>139555</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:152817</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7Qxzzx</td>
+                                <td>152817</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_STR_CA_30_CA30:154556</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>16CsBFf4PDQhsRUW9qPmCg</td>
+                                <td>154556</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        ConstructionMethod data shall be In Situ and in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        StructuralClass data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        StrengthClass data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        ExposureClass data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        ReinforcementVolumeRatio data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        ReinforcementStrengthClass data shall be provided in the dataset Pset_ConcreteElementGeneral
+                    </summary>
+                </details>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h2>Floor Requirements</h2>
+
+        <div class="container">
+            <div class="fail percent" style="width: 42%;">42%</div>
+        </div>
+        <p>
+            <span class="item fail">Fail</span>
+            <span class="item">
+                Checks passed: <strong>9</strong> / <strong>21</strong>
+            </span>
+            <span class="item">
+                Elements passed: <strong>0</strong> / <strong>3</strong>
+            </span>
+        </p>
+        <p>
+            <strong>Applicability</strong>
+        </p>
+        <ul>
+            <li>All IFCSLAB data of type FLOOR</li>
+        </ul>
+        <p>
+            <strong>Requirements</strong>
+        </p>
+        <ol>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The Name shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The ObjectType shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        FireRating data shall be provided in the dataset Pset_SlabCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_STR_LT_30_CA5_LT25:139442</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i7K</td>
+                                <td>139442</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_ARI_GR_20,5_GR1,5_CS5_RD4_XP10:143956</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2pJ7vzLEXA88EEG7Xu2e4m</td>
+                                <td>143956</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_ARI_PL_20_CA6_PL14:225499</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>30Oy3odC55PBo2GfHxmX8f</td>
+                                <td>225499</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        IsExternal data shall be provided in the dataset Pset_SlabCommon
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Loadbearing data shall be provided in the dataset Pset_SlabCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_STR_LT_30_CA5_LT25:139442</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i7K</td>
+                                <td>139442</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_ARI_GR_20,5_GR1,5_CS5_RD4_XP10:143956</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2pJ7vzLEXA88EEG7Xu2e4m</td>
+                                <td>143956</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_ARI_PL_20_CA6_PL14:225499</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>30Oy3odC55PBo2GfHxmX8f</td>
+                                <td>225499</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Compartimentation data shall be provided in the dataset Pset_SlabCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_STR_LT_30_CA5_LT25:139442</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i7K</td>
+                                <td>139442</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_ARI_GR_20,5_GR1,5_CS5_RD4_XP10:143956</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2pJ7vzLEXA88EEG7Xu2e4m</td>
+                                <td>143956</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_ARI_PL_20_CA6_PL14:225499</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>30Oy3odC55PBo2GfHxmX8f</td>
+                                <td>225499</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Status data shall be {&#x27;enumeration&#x27;: [&#x27;NEW&#x27;, &#x27;EXISTING&#x27;, &#x27;DEMOLISH&#x27;, &#x27;TEMPORARY&#x27;, &#x27;OTHER&#x27;, &#x27;NOTKNOWN&#x27;, &#x27;UNSET&#x27;]} and in the dataset Pset_SlabCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_STR_LT_30_CA5_LT25:139442</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i7K</td>
+                                <td>139442</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_ARI_GR_20,5_GR1,5_CS5_RD4_XP10:143956</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2pJ7vzLEXA88EEG7Xu2e4m</td>
+                                <td>143956</td>
+                            </tr>
+                            <tr>
+                                <td>IfcSlab</td>
+                                <td>FLOOR</td>
+                                <td>Pavimento:PAV_ARI_PL_20_CA6_PL14:225499</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>30Oy3odC55PBo2GfHxmX8f</td>
+                                <td>225499</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h2>Partitioning Wall Requirements</h2>
+
+        <div class="container">
+            <div class="fail percent" style="width: 44%;">44%</div>
+        </div>
+        <p>
+            <span class="item fail">Fail</span>
+            <span class="item">
+                Checks passed: <strong>37</strong> / <strong>84</strong>
+            </span>
+            <span class="item">
+                Elements passed: <strong>0</strong> / <strong>12</strong>
+            </span>
+        </p>
+        <p>
+            <strong>Applicability</strong>
+        </p>
+        <ul>
+            <li>All IFCWALL data</li>
+            <li>Data where the ObjectType is Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5</li>
+        </ul>
+        <p>
+            <strong>Requirements</strong>
+        </p>
+        <ol>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The Name shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The ObjectType shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        FireRating data shall be provided in the dataset Pset_WallCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:139679</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i3v</td>
+                                <td>139679</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:140832</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2sSnfX5$L658_5WrDew8Sm</td>
+                                <td>140832</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:152691</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7Qxz$v</td>
+                                <td>152691</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:153159</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7QxztD</td>
+                                <td>153159</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:166908</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QOjwcgYn8kxUp1hYyq1fM</td>
+                                <td>166908</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:166949</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QOjwcgYn8kxUp1hYyq1sF</td>
+                                <td>166949</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:167275</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1VzwSlz5nBoAIGpEg6HBHd</td>
+                                <td>167275</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:169642</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2cr5a8oczF5PorVi$sZ3B6</td>
+                                <td>169642</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:230275</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2fq2VmmPH7ffVob1Qf8kqk</td>
+                                <td>230275</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:246080</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1v3wacEqT2svXArpFDGgM$</td>
+                                <td>246080</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:246459</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QU2pzoYT6r91OToc$ggOy</td>
+                                <td>246459</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        IsExternal data shall be provided in the dataset Pset_WallCommon
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Loadbearing data shall be provided in the dataset Pset_WallCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:139679</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i3v</td>
+                                <td>139679</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:140832</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2sSnfX5$L658_5WrDew8Sm</td>
+                                <td>140832</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:152691</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7Qxz$v</td>
+                                <td>152691</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:153159</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7QxztD</td>
+                                <td>153159</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:154317</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>16CsBFf4PDQhsRUW9qPm9R</td>
+                                <td>154317</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:166908</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QOjwcgYn8kxUp1hYyq1fM</td>
+                                <td>166908</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:166949</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QOjwcgYn8kxUp1hYyq1sF</td>
+                                <td>166949</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:167275</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1VzwSlz5nBoAIGpEg6HBHd</td>
+                                <td>167275</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:169642</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2cr5a8oczF5PorVi$sZ3B6</td>
+                                <td>169642</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:230275</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2fq2VmmPH7ffVob1Qf8kqk</td>
+                                <td>230275</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:246080</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1v3wacEqT2svXArpFDGgM$</td>
+                                <td>246080</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:246459</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QU2pzoYT6r91OToc$ggOy</td>
+                                <td>246459</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Compartimentation data shall be provided in the dataset Pset_WallCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:139679</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i3v</td>
+                                <td>139679</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:140832</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2sSnfX5$L658_5WrDew8Sm</td>
+                                <td>140832</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:152691</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7Qxz$v</td>
+                                <td>152691</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:153159</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7QxztD</td>
+                                <td>153159</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:154317</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>16CsBFf4PDQhsRUW9qPm9R</td>
+                                <td>154317</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:166908</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QOjwcgYn8kxUp1hYyq1fM</td>
+                                <td>166908</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:166949</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QOjwcgYn8kxUp1hYyq1sF</td>
+                                <td>166949</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:167275</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1VzwSlz5nBoAIGpEg6HBHd</td>
+                                <td>167275</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:169642</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2cr5a8oczF5PorVi$sZ3B6</td>
+                                <td>169642</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:230275</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2fq2VmmPH7ffVob1Qf8kqk</td>
+                                <td>230275</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:246080</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1v3wacEqT2svXArpFDGgM$</td>
+                                <td>246080</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:246459</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QU2pzoYT6r91OToc$ggOy</td>
+                                <td>246459</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Status data shall be {&#x27;enumeration&#x27;: [&#x27;NEW&#x27;, &#x27;EXISTING&#x27;, &#x27;DEMOLISH&#x27;, &#x27;TEMPORARY&#x27;, &#x27;OTHER&#x27;, &#x27;NOTKNOWN&#x27;, &#x27;UNSET&#x27;]} and in the dataset Pset_WallCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:139679</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>3qgEayMZ55yxnk8LFa1i3v</td>
+                                <td>139679</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:140832</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2sSnfX5$L658_5WrDew8Sm</td>
+                                <td>140832</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:152691</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7Qxz$v</td>
+                                <td>152691</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:153159</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1sm_GUAnj8mBnFLn7QxztD</td>
+                                <td>153159</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:154317</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>16CsBFf4PDQhsRUW9qPm9R</td>
+                                <td>154317</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:166908</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QOjwcgYn8kxUp1hYyq1fM</td>
+                                <td>166908</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:166949</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QOjwcgYn8kxUp1hYyq1sF</td>
+                                <td>166949</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:167275</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1VzwSlz5nBoAIGpEg6HBHd</td>
+                                <td>167275</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:169642</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2cr5a8oczF5PorVi$sZ3B6</td>
+                                <td>169642</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:230275</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2fq2VmmPH7ffVob1Qf8kqk</td>
+                                <td>230275</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:246080</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1v3wacEqT2svXArpFDGgM$</td>
+                                <td>246080</td>
+                            </tr>
+                            <tr>
+                                <td>IfcWall</td>
+                                <td>STANDARD</td>
+                                <td>Muro di base:MUR_INT_LT_15_IN1,5_LT12_IN1,5:246459</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>1QU2pzoYT6r91OToc$ggOy</td>
+                                <td>246459</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h2>Roof Requirements</h2>
+
+        <div class="container">
+            <div class="fail percent" style="width: 60%;">60%</div>
+        </div>
+        <p>
+            <span class="item fail">Fail</span>
+            <span class="item">
+                Checks passed: <strong>3</strong> / <strong>5</strong>
+            </span>
+            <span class="item">
+                Elements passed: <strong>0</strong> / <strong>1</strong>
+            </span>
+        </p>
+        <p>
+            <strong>Applicability</strong>
+        </p>
+        <ul>
+            <li>All IFCROOF data</li>
+        </ul>
+        <p>
+            <strong>Requirements</strong>
+        </p>
+        <ol>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The Name shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        The ObjectType shall be provided
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        FireRating data shall be provided in the dataset Pset_RoofCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcRoof</td>
+                                <td>NOTDEFINED</td>
+                                <td>Tetto di base:Latero Cementizio - 27 cm:170917</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2cr5a8oczF5PorVi$sZ3$9</td>
+                                <td>170917</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+            <li class="pass">
+                <details>
+                    <summary>
+                        IsExternal data shall be provided in the dataset Pset_RoofCommon
+                    </summary>
+                </details>
+            </li>
+            <li class="fail">
+                <details>
+                    <summary>
+                        Status data shall be {&#x27;enumeration&#x27;: [&#x27;NEW&#x27;, &#x27;EXISTING&#x27;, &#x27;DEMOLISH&#x27;, &#x27;TEMPORARY&#x27;, &#x27;OTHER&#x27;, &#x27;NOTKNOWN&#x27;, &#x27;UNSET&#x27;]} and in the dataset Pset_RoofCommon
+                    </summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>PredefinedType</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Warning</th>
+                                <th>GlobalId</th>
+                                <th>Tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IfcRoof</td>
+                                <td>NOTDEFINED</td>
+                                <td>Tetto di base:Latero Cementizio - 27 cm:170917</td>
+                                <td>None</td>
+                                <td>The property set does not contain the required property</td>
+                                <td>2cr5a8oczF5PorVi$sZ3$9</td>
+                                <td>170917</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </li>
+        </ol>
+    </section>
+    <hr>
+    <footer>
+        <p>
+            Report by the <a href="https://blenderbim.org/">BlenderBIM Add-on</a> and <a href="http://ifcopenshell.org/">IfcOpenShell</a>.
+        </p>
+    </footer>
+</body>
+</html>
