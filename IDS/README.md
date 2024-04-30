@@ -1,3 +1,5 @@
+<img src="https://github.com/Cassa97/IFC-Cost-Item-Validation/assets/115898053/d79d5bf4-e0c7-4042-8e7b-d03f2c65c266" width="200" >
+
 Code for IDS was developed starting from “IfcTester” (https://pypi.org/project/ifctester/)
 
 Below is an extract of some results of the validation process:
